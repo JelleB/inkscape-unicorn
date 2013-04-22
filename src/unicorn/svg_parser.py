@@ -65,8 +65,8 @@ class SvgIgnoredEntity:
   def __str__(self):
     return "Ignored '%s' tag" % self.tag
   def get_gcode(self,context):
-    #context.codes.append("(" + str(self) + ")")
-    #context.codes.append("")
+    context.codes.append("(" + str(self) + ")")
+    context.codes.append("")
     return
 
 class SvgPath(entities.PolyLine):
@@ -177,7 +177,7 @@ class SvgLayerChange():
   def __init__(self,layer_name):
     self.layer_name = layer_name
   def get_gcode(self,context):
-    context.codes.append("M01 (Plotting layer '%s')" % self.layer_name)
+    context.codes.append("(Printing layer '%s')" % self.layer_name)
 
 class SvgParser:
 
@@ -262,8 +262,8 @@ class SvgParser:
       if node.tag == inkex.addNS('g','svg') or node.tag == 'g':
         if (node.get(inkex.addNS('groupmode','inkscape')) == 'layer'):
           layer_name = node.get(inkex.addNS('label','inkscape'))
-          if(self.pause_on_layer_change == 'true'):
-            self.entities.append(SvgLayerChange(layer_name))
+          #if(self.pause_on_layer_change == 'true'):
+          self.entities.append(SvgLayerChange(layer_name))
         self.recursivelyTraverseSvg(node, matNew, parent_visibility = v)
       elif node.tag == inkex.addNS('use','svg') or node.tag == 'use':
         refid = node.get(inkex.addNS('href','xlink'))

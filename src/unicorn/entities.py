@@ -51,7 +51,7 @@ class Arc(Entity):
 		if (delta < 0):
 			arc_code = "G3"
 		else:
-			arc_code = "G3"
+			arc_code = "G2"
 		arc_code = arc_code + " X%.2f Y%.2f I%.2f J%.2f F%.2f" % (end[0], end[1], self.center[0] - start[0], self.center[1] - start[1], context.xy_feedrate)
 
 		context.codes.append("(" + str(self) + ")")
@@ -81,7 +81,7 @@ class PolyLine(Entity):
 			context.go_to_point(start[0],start[1])
 			context.start()
 			for point in points[1:]:
-				context.draw_to_point(point[0],point[1])
+				context.draw_to_point(point[0],point[1], context.threadWidth, context.zHeight)
 				context.last = point
 			context.stop()
 			context.codes.append("")
