@@ -177,7 +177,10 @@ class SvgLayerChange():
   def __init__(self,layer_name):
     self.layer_name = layer_name
   def get_gcode(self,context):
-    context.codes.append("(Printing layer '%s')" % self.layer_name)
+    context.codes.append(";(Printing layer '%s', context.z = %f)" % (self.layer_name , context.z))  
+    context.z += context.zHeight #I really wonder if this is the right spot for it..?
+    #context.z += 1
+    context.codes.append("G0 Z%0.2f " % context.z)
 
 class SvgParser:
 

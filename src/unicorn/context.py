@@ -14,12 +14,13 @@ class GCodeContext:
       self.drawing = False
       self.retracted = False
       self.last = None
-      self.e = 0
+      self.e = 0.0
+      self.z = 0.0
 
       self.preamble = [
-        "(3D printer gcode generated from %s )" % (self.file),
-        "( %s )" % " ".join(sys.argv).replace('\n','/'),
-        "G21 (metric ftw)",
+        ";(3D printer gcode generated from %s )" % (self.file),
+        ";( %s )" % " ".join(sys.argv).replace('\n','/'),
+        ";G21 (metric ftw)",
         "G90 (absolute mode)",
         ""
       ]
@@ -31,13 +32,13 @@ class GCodeContext:
 
       self.postscript = [
         "",
-        "(end of print job)",
+        ";(end of print job)",
         "M104 S0",
         "G91",
         "G1 X10 Y10 Z5 E-5",
         "G90",
         "G28 X0 Y0" ,
-        "G84 (drives off)",
+        "G84 ;(drives off)",
         ""
       ]
 
@@ -46,7 +47,7 @@ class GCodeContext:
       ]
 
       self.sheet_header = [
-        "(start of sheet header)",
+        ";(start of sheet header)",
         ""
       ]
 
@@ -54,21 +55,21 @@ class GCodeContext:
         ""
         ]
 
-      self.loop_forever = [ "M30 (Plot again?)" ]
+      self.loop_forever = [ "M30 ;(Plot again?)" ]
 
       self.codes = []
 
     def start(self):
       if (self.retracted):
         self.e += 5
-        self.codes.append("G1 E%0.4f (de-retract some)" %(self.e))
+        self.codes.append("G1 E%0.4f ;(de-retract some)" %(self.e))
         self.retracted = False
       self.drawing = True
 
     def stop(self):
       if (self.retracted == False):
         self.e += -5
-        self.codes.append("G1 E%0.4f (retract some)" %(self.e))
+        self.codes.append("G1 E%0.4f ;(retract some)" %(self.e))
         self.retracted = True
       self.drawing = False
 
