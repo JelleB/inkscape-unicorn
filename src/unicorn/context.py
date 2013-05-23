@@ -20,8 +20,8 @@ class GCodeContext:
       self.preamble = [
         ";(3D printer gcode generated from %s )" % (self.file),
         ";( %s )" % " ".join(sys.argv).replace('\n','/'),
-        ";G21 (metric ftw)",
-        "G90 (absolute mode)",
+        ";G21 ;(metric ftw)",
+        "G90 ;(absolute mode)",
         ""
       ]
       if startGcode != "" :

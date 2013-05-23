@@ -69,8 +69,10 @@ class Ellipse(Entity):
 		(self.center[0], self.center[1], self.major[0], self.major[1], self.minor_to_major, self.start_param, self.end_param)
 
 class PolyLine(Entity):
+        def __init__(self):
+                self.style = None
 	def __str__(self):
-		return "Polyline consisting of %d segments." % len(self.segments)
+		return "Polyline consisting of %d segments, style = %s" %( len(self.segments), self.style)
 
 	def get_gcode(self,context):
 		"Emit gcode for drawing polyline"
