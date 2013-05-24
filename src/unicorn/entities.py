@@ -11,7 +11,7 @@ class Line(Entity):
 		return "Line from [%.2f, %.2f] to [%.2f, %.2f]" % (self.start[0], self.start[1], self.end[0], self.end[1])
 	def get_gcode(self,context):
 		"Emit gcode for drawing line"
-		context.codes.append("(" + str(self) + ")")
+		context.codes.append(";(" + str(self) + ")")
 		context.go_to_point(self.start[0],self.start[1])
 		context.draw_to_point(self.end[0],self.end[1])
 		context.codes.append("")
@@ -24,7 +24,7 @@ class Circle(Entity):
 		start = (self.center[0] - self.radius, self.center[1])
 		arc_code = "G3 I%.2f J0 F%.2f" % (self.radius, context.xy_feedrate)
 
-		context.codes.append("(" + str(self) + ")")
+		context.codes.append(";(" + str(self) + ")")
 		context.go_to_point(start[0],start[1])
 		context.start()
 		context.codes.append(arc_code)
@@ -54,7 +54,7 @@ class Arc(Entity):
 			arc_code = "G2"
 		arc_code = arc_code + " X%.2f Y%.2f I%.2f J%.2f F%.2f" % (end[0], end[1], self.center[0] - start[0], self.center[1] - start[1], context.xy_feedrate)
 
-		context.codes.append("(" + str(self) + ")")
+		context.codes.append(";(" + str(self) + ")")
 		context.go_to_point(start[0],start[1])
 		context.last = end
 		context.start()
@@ -79,7 +79,7 @@ class PolyLine(Entity):
 		for points in self.segments:
 			start = points[0]
 
-			context.codes.append("(" + str(self) + ")")
+			context.codes.append(";(" + str(self) + ")")
 			context.switchExtruder(self.stroke)
 			context.go_to_point(start[0],start[1])
 			context.start()

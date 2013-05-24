@@ -65,7 +65,7 @@ class SvgIgnoredEntity:
   def __str__(self):
     return "Ignored '%s' tag" % self.tag
   def get_gcode(self,context):
-    context.codes.append("(" + str(self) + ")")
+    context.codes.append(";(" + str(self) + ")")
     context.codes.append("")
     return
 

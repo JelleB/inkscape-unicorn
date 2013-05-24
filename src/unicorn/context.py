@@ -25,7 +25,6 @@ class GCodeContext:
       self.preamble = [
         ";(3D printer gcode generated from %s )" % (self.file),
         ";( %s )" % " ".join(sys.argv).replace('\n','/'),
-        ";G21 ;(metric ftw)",
         "G90 ;(absolute mode)",
         ""
       ]
@@ -38,13 +37,13 @@ class GCodeContext:
       self.postscript = [
         "",
         ";(end of print job)",
-        "(huh, hij doet ut nog)",
+        ";(huh, hij doet ut nog)",
         "M104 S0",
         "G91",
         "G1 X10 Y10 Z5 E-5",
         "G90",
         "G28 X0 Y0" ,
-        "G84 ;(drives off)",
+        "M84 ;(drives off)",
         ""
       ]
 
@@ -87,7 +86,7 @@ class GCodeContext:
       else:
         if self.drawing: 
           self.stop(self)
-        self.codes.append("G0 X%.2f Y%.2f F%.2f" % (x,y, self.xy_feedrate * 60))
+        self.codes.append("G0 X%.2f Y%.2f F%.2f" % (x,y, self.xy_feedrate * 180))
       self.last = (x,y)
 	
     def draw_to_point(self, x, y, width, layerHeight, stop=False):
@@ -112,9 +111,9 @@ class GCodeContext:
     def switchExtruder(self, color=''):
       "determine if we need to switch extruders and append the needed gcode if so"
       if self.currentColor == color:
-        self.codes.append( "(same color, no switch:" + color + ")")
+        self.codes.append( ";(same color, no switch:" + color + ")")
         return 
-      self.codes.append( "(old color:" + self.currentColor + " new color:" + color + ")")
+      self.codes.append( ";(old color:" + self.currentColor + " new color:" + color + ")")
       if color == self.ex2color:
         #switch to new extruder
         self.codes.append("G92 X%0.2f Y%0.2f" % (self.last[0] + self.ex2offsetX, self.last[1] + self.ex2offsetY))
