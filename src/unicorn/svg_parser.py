@@ -71,6 +71,18 @@ class SvgIgnoredEntity:
 
 class SvgPath(entities.PolyLine):
   def load(self, node, mat):
+    #JiB
+    #split the syle in separate tuples and assign to path
+    s = node.get('style')
+    if s: 
+      self.style = s
+      for item in s.split(';'):
+        attribute , value = item.split(':')
+        #print attribute, value
+        setattr(self, attribute.replace('-','') , value)
+        #print getattr(self, attribute.replace('-','') )
+      print self.strokewidth
+        #print attribute.replace('-','')
     d = node.get('d')
     if len(simplepath.parsePath(d)) == 0:
       return
@@ -90,17 +102,14 @@ class SvgPath(entities.PolyLine):
   
 
   def new_path_from_node(self, node):
+  
+    return 
     newpath = inkex.etree.Element(inkex.addNS('path','svg'))
     s = node.get('style')
     if s:
       newpath.set('style',s)
-      #JiB
-      #split the syle in separate tuples and assign to path
-      for item in s.split():
-        attribute , value = item.split(';')
-        newpath.set(attribute , value)
     else:
-      newpath.set('style', 'test:1234')    
+      newpath.setattr('style', 'test:1234')    
         
     t = node.get('transform')
     if t:

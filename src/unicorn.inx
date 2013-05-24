@@ -7,11 +7,11 @@
   <dependency type="executable" location="extensions">inkex.py</dependency>
   <param name="tab" type="notebook">
     <page name="tab1" _gui-text="printer Settings">
-      <param name="xy-feedrate" type="float" min="100.0" max="5000.0" _gui-text="XY axes feedrate in mm/sec.">80.0</param>
-      <param name="z-feedrate" type="float" min="0.0" max="1000.0" _gui-text="Z-axis feedrate in mm/sec.">10.0</param>
+      <param name="xy-feedrate" type="float" min="1.0" max="200.0" _gui-text="XY axes feedrate in mm/sec.">10.0</param>
+      <param name="z-feedrate" type="float" min="0.0" max="50.0" _gui-text="Z-axis feedrate in mm/sec.">10.0</param>
       <param name="z-height" type="float" min="0.0" max="110.0" _gui-text="height of each layer in mm.">0.2</param>
-      <param name="thread-width" type="float" min="0.00" max="2.00" _gui-text="Default width of each path in mm.">0.6</param>
-      <param name="temp" type="int" min="-1" max="250" _gui-text="temperature to print at.">220</param>
+      <param name="thread-width" type="float" min="0.00" max="6.00" _gui-text="Default width of each path in mm.">0.6</param>
+      <param name="temp" type="int" min="-1" max="250" _gui-text="temperature to print at.">0</param>
     </page>
     <page name="gcode" _gui-text="Start and Stop routines">
       <_param name="startGcode" type="string" xml:space="preserve">(add your startup routine gcode here)

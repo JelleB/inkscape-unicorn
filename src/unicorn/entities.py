@@ -82,8 +82,13 @@ class PolyLine(Entity):
 			context.codes.append("(" + str(self) + ")")
 			context.go_to_point(start[0],start[1])
 			context.start()
+			width = context.threadWidth
+			s = getattr(self, 'strokewidth', context.threadWidth)
+			if s:
+			        width = float(s) * 0.28222 
+			        
 			for point in points[1:]:
-				context.draw_to_point(point[0],point[1], context.threadWidth, context.zHeight)
+				context.draw_to_point(point[0],point[1], width, context.zHeight)
 				context.last = point
 			context.stop()
 			context.codes.append("")

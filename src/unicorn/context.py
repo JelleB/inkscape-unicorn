@@ -33,6 +33,7 @@ class GCodeContext:
       self.postscript = [
         "",
         ";(end of print job)",
+        "(huh, hij doet ut nog)",
         "M104 S0",
         "G91",
         "G1 X10 Y10 Z5 E-5",
