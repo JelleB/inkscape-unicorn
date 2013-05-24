@@ -80,10 +80,11 @@ class PolyLine(Entity):
 			start = points[0]
 
 			context.codes.append("(" + str(self) + ")")
+			context.switchExtruder(self.stroke)
 			context.go_to_point(start[0],start[1])
 			context.start()
 			width = context.threadWidth
-			s = getattr(self, 'strokewidth', context.threadWidth)
+			s = getattr(self, 'strokewidth', context.threadWidth/0.28222)
 			if s:
 			        width = float(s) * 0.28222 
 			        

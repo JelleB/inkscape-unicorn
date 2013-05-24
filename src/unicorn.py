@@ -30,7 +30,7 @@ class MyEffect(inkex.Effect):
     inkex.Effect.__init__(self)
     self.OptionParser.add_option("--xy-feedrate",
                       action="store", type="float",
-                      dest="xy_feedrate", default="80.0",
+                      dest="xy_feedrate", default="10.0",
                       help="XY axes feedrate in mm/min")
     self.OptionParser.add_option("--z-feedrate",
                       action="store", type="float",
@@ -60,6 +60,26 @@ class MyEffect(inkex.Effect):
                       action="store", type="string",
                       dest="pause_on_layer_change", default="false",
                       help="Pause on layer changes.")
+    self.OptionParser.add_option("--filament",
+                      action="store", type="float",
+                      dest="filament", default="38",
+                      help="Filament diameter.")  
+    self.OptionParser.add_option("--ex1color",
+                      action="store", type="string",
+                      dest="ex1color", default="#000000",
+                      help="color for the 1st(default) extruder.")                                       
+    self.OptionParser.add_option("--ex2color",
+                      action="store", type="string",
+                      dest="ex2color", default="#000000",
+                      help="color for the 2nd extruder.") 
+    self.OptionParser.add_option("--ex2offsetX",
+                      action="store", type="float",
+                      dest="ex2offsetX", default="0",
+                      help="X offset for the 2nd extruder.") 
+    self.OptionParser.add_option("--ex2offsetY",
+                      action="store", type="float",
+                      dest="ex2offsetY", default="0",
+                      help="Y offset for the 2nd extruder.")                                            
     self.OptionParser.add_option("--tab",
                       action="store", type="string",
                       dest="tab")
@@ -75,6 +95,10 @@ class MyEffect(inkex.Effect):
                            self.options.temp, 
                            self.options.g28,
                            self.options.startGcode,
+                           self.options.filament,
+                           self.options.ex2color,
+                           self.options.ex2offsetX,
+                           self.options.ex2offsetY,
                            self.svg_file)
     parser = SvgParser(self.document.getroot(), self.options.pause_on_layer_change)
     parser.parse()

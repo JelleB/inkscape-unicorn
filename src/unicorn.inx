@@ -9,14 +9,20 @@
     <page name="tab1" _gui-text="printer Settings">
       <param name="xy-feedrate" type="float" min="1.0" max="200.0" _gui-text="XY axes feedrate in mm/sec.">10.0</param>
       <param name="z-feedrate" type="float" min="0.0" max="50.0" _gui-text="Z-axis feedrate in mm/sec.">10.0</param>
-      <param name="z-height" type="float" min="0.0" max="110.0" _gui-text="height of each layer in mm.">0.2</param>
-      <param name="thread-width" type="float" min="0.00" max="6.00" _gui-text="Default width of each path in mm.">0.6</param>
+      <param name="z-height" type="float" min="0.0" max="110.0" _gui-text="height of each layer in mm.">2</param>
+      <param name="thread-width" type="float" min="0.00" max="6.00" _gui-text="Default width of each path in mm.">4</param>
+      <param name="filament" type="float" min="0.00" max="100.00" _gui-text="diameter of the (virtual) filament used for E calculations,in mm.">37</param>
       <param name="temp" type="int" min="-1" max="250" _gui-text="temperature to print at.">0</param>
+    </page>
+    <page name="tab2" _gui-text="Dual extruder Settings">
+      <param name="ex1color" type="string" _gui-text="color for extruder1 (default).">#000000</param>
+      <param name="ex2color" type="string" _gui-text="color for extruder2.">#ff0000</param>
+      <param name="ex2offsetX" type="float" min="0.0" max="100.0" _gui-text="X-offset of the 2nd extruder in mm.">0.0</param>
+      <param name="ex2offsetY" type="float" min="0.0" max="100.0" _gui-text="Y-offset of the 2nd extruder in mm.">52</param>>
     </page>
     <page name="gcode" _gui-text="Start and Stop routines">
       <_param name="startGcode" type="string" xml:space="preserve">(add your startup routine gcode here)
-G0 Z10
-M109 S220
+G0 Z1
 G92 E0
 G1 E5 F500
 G1.Y10 Z0

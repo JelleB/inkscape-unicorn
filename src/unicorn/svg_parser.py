@@ -79,9 +79,10 @@ class SvgPath(entities.PolyLine):
       for item in s.split(';'):
         attribute , value = item.split(':')
         #print attribute, value
+        value = value.replace('px', '')
         setattr(self, attribute.replace('-','') , value)
         #print getattr(self, attribute.replace('-','') )
-      print self.strokewidth
+      #print ";" + self.strokewidth
         #print attribute.replace('-','')
     d = node.get('d')
     if len(simplepath.parsePath(d)) == 0:
@@ -102,8 +103,6 @@ class SvgPath(entities.PolyLine):
   
 
   def new_path_from_node(self, node):
-  
-    return 
     newpath = inkex.etree.Element(inkex.addNS('path','svg'))
     s = node.get('style')
     if s:
