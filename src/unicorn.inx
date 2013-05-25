@@ -21,12 +21,12 @@
       <param name="ex2offsetY" type="float" min="0.0" max="100.0" _gui-text="Y-offset of the 2nd extruder in mm.">52</param>>
     </page>
     <page name="gcode" _gui-text="Start and Stop routines">
-      <_param name="startGcode" type="string" xml:space="preserve">G92 Z0 E0 
+      <_param name="startGcode" type="string" xml:space="preserve">G92 Z0 E0 X-30 Y-30
       </_param>
       <param name="g28" type="boolean" _gui-text="home the printer before printing">true</param>
     </page>
     <page name="help" _gui-text="Help">
-      <_param name="ext_help" type="description" xml:space="preserve">MakerBot Unicorn G-Code Output.
+      <_param name="ext_help" type="description" xml:space="preserve">3D printer G-Code Output.
 
 - All text must be converted to paths.
 - Curves are approximated with line segments.
