@@ -250,7 +250,7 @@ class SvgParser:
     # 0.28222 scale determined by comparing pixels-per-mm in a default Inkscape file.
     self.svgWidth = self.getLength('width', 212.6) * 0.28222
     self.svgHeight = self.getLength('height', 212.6) * 0.28222
-    self.recursivelyTraverseSvg(self.svg, [[0.28222, 0.0, -(self.svgWidth/2.0)], [0.0, -0.28222, (self.svgHeight/2.0)]])
+    self.recursivelyTraverseSvg(self.svg, [[0.28222, 0.0, 0.0], [0.0, -0.28222, self.svgHeight]])
 
   # TODO: center this thing
   def recursivelyTraverseSvg(self, nodeList, 
